@@ -4,7 +4,14 @@
     <option name="SCOPE_TYPE" value="3" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e2b11e8b-2b03-486a-8363-92d7635777d7" name="Default Changelist" comment="" />
+    <list default="true" id="e2b11e8b-2b03-486a-8363-92d7635777d7" name="Default Changelist" comment="">
+      <change beforePath="$APPLICATION_HOME_DIR$/bin/Users/giladspitzer/PycharmProjects/Upwork/TeeTimeScraper/.github/workflows/main.yml" beforeDir="false" />
+      <change beforePath="$APPLICATION_HOME_DIR$/bin/Users/giladspitzer/PycharmProjects/Upwork/TeeTimeScraper/.idea/TeeTimeScraper.iml" beforeDir="false" afterPath="$APPLICATION_HOME_DIR$/bin/Users/giladspitzer/PycharmProjects/Upwork/TeeTimeScraper/.idea/TeeTimeScraper.iml" afterDir="false" />
+      <change beforePath="$APPLICATION_HOME_DIR$/bin/Users/giladspitzer/PycharmProjects/Upwork/TeeTimeScraper/.idea/misc.xml" beforeDir="false" afterPath="$APPLICATION_HOME_DIR$/bin/Users/giladspitzer/PycharmProjects/Upwork/TeeTimeScraper/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$APPLICATION_HOME_DIR$/bin/Users/giladspitzer/PycharmProjects/Upwork/TeeTimeScraper/.idea/workspace.xml" beforeDir="false" afterPath="$APPLICATION_HOME_DIR$/bin/Users/giladspitzer/PycharmProjects/Upwork/TeeTimeScraper/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$APPLICATION_HOME_DIR$/bin/Users/giladspitzer/PycharmProjects/Upwork/TeeTimeScraper/models.py" beforeDir="false" afterPath="$APPLICATION_HOME_DIR$/bin/Users/giladspitzer/PycharmProjects/Upwork/TeeTimeScraper/models.py" afterDir="false" />
+      <change beforePath="$APPLICATION_HOME_DIR$/bin/Users/giladspitzer/PycharmProjects/Upwork/TeeTimeScraper/teetimenotifier.py" beforeDir="false" afterPath="$APPLICATION_HOME_DIR$/bin/Users/giladspitzer/PycharmProjects/Upwork/TeeTimeScraper/teetimenotifier.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -17,6 +24,9 @@
         <option value="HTML File" />
       </list>
     </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$APPLICATION_HOME_DIR$/bin/Users/giladspitzer/PycharmProjects/Upwork/TeeTimeScraper" />
   </component>
   <component name="ProjectId" id="1jv0f5dLSqU7eMr4tgf022IZrFg" />
   <component name="ProjectViewState">
@@ -107,7 +117,8 @@
       <updated>1604669357483</updated>
       <workItem from="1604669364469" duration="39000" />
       <workItem from="1604669425572" duration="828000" />
-      <workItem from="1604849943445" duration="58385000" />
+      <workItem from="1604849943445" duration="59999000" />
+      <workItem from="1605189220875" duration="415000" />
     </task>
     <servers />
   </component>
@@ -123,34 +134,36 @@
       <screen x="0" y="23" width="1440" height="831" />
     </state>
     <state x="428" y="300" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.23.1440.831@0.23.1440.831" timestamp="1605118193625" />
-    <state width="1308" height="304" key="GridCell.Tab.0.bottom" timestamp="1605117554492">
+    <state width="1308" height="304" key="GridCell.Tab.0.bottom" timestamp="1605189072430">
       <screen x="0" y="23" width="1440" height="831" />
     </state>
-    <state width="1308" height="304" key="GridCell.Tab.0.bottom/0.23.1440.831@0.23.1440.831" timestamp="1605117554492" />
+    <state width="1308" height="304" key="GridCell.Tab.0.bottom/0.23.1440.831@0.23.1440.831" timestamp="1605189072430" />
     <state width="1308" height="304" key="GridCell.Tab.0.bottom/0.23.1440.832@0.23.1440.832" timestamp="1605020865688" />
-    <state width="1308" height="304" key="GridCell.Tab.0.center" timestamp="1605117554491">
+    <state width="1308" height="304" key="GridCell.Tab.0.center" timestamp="1605189072429">
       <screen x="0" y="23" width="1440" height="831" />
     </state>
-    <state width="1308" height="304" key="GridCell.Tab.0.center/0.23.1440.831@0.23.1440.831" timestamp="1605117554491" />
+    <state width="1308" height="304" key="GridCell.Tab.0.center/0.23.1440.831@0.23.1440.831" timestamp="1605189072429" />
     <state width="1308" height="304" key="GridCell.Tab.0.center/0.23.1440.832@0.23.1440.832" timestamp="1605020865687" />
-    <state width="1308" height="304" key="GridCell.Tab.0.left" timestamp="1605117554491">
+    <state width="1308" height="304" key="GridCell.Tab.0.left" timestamp="1605189072428">
       <screen x="0" y="23" width="1440" height="831" />
     </state>
-    <state width="1308" height="304" key="GridCell.Tab.0.left/0.23.1440.831@0.23.1440.831" timestamp="1605117554491" />
+    <state width="1308" height="304" key="GridCell.Tab.0.left/0.23.1440.831@0.23.1440.831" timestamp="1605189072428" />
     <state width="1308" height="304" key="GridCell.Tab.0.left/0.23.1440.832@0.23.1440.832" timestamp="1605020865687" />
-    <state width="1308" height="304" key="GridCell.Tab.0.right" timestamp="1605117554491">
+    <state width="1308" height="304" key="GridCell.Tab.0.right" timestamp="1605189072430">
       <screen x="0" y="23" width="1440" height="831" />
     </state>
-    <state width="1308" height="304" key="GridCell.Tab.0.right/0.23.1440.831@0.23.1440.831" timestamp="1605117554491" />
+    <state width="1308" height="304" key="GridCell.Tab.0.right/0.23.1440.831@0.23.1440.831" timestamp="1605189072430" />
     <state width="1308" height="304" key="GridCell.Tab.0.right/0.23.1440.832@0.23.1440.832" timestamp="1605020865687" />
-    <state x="172" y="132" key="SettingsEditor" timestamp="1605181832028">
-      <screen x="0" y="23" width="1440" height="831" />
+    <state x="172" y="132" key="SettingsEditor" timestamp="1605188327968">
+      <screen x="0" y="23" width="1440" height="832" />
     </state>
     <state x="172" y="132" key="SettingsEditor/0.23.1440.831@0.23.1440.831" timestamp="1605181832028" />
-    <state x="335" y="269" key="com.intellij.ide.util.TipDialog" timestamp="1604849963060">
-      <screen x="0" y="23" width="1440" height="830" />
+    <state x="172" y="132" key="SettingsEditor/0.23.1440.832@0.23.1440.832" timestamp="1605188327968" />
+    <state x="335" y="269" key="com.intellij.ide.util.TipDialog" timestamp="1605189221199">
+      <screen x="0" y="23" width="1440" height="831" />
     </state>
     <state x="335" y="269" key="com.intellij.ide.util.TipDialog/0.23.1440.830@0.23.1440.830" timestamp="1604849963060" />
+    <state x="335" y="269" key="com.intellij.ide.util.TipDialog/0.23.1440.831@0.23.1440.831" timestamp="1605189221199" />
     <state x="323" y="177" width="991" height="518" key="find.popup" timestamp="1605184885458">
       <screen x="0" y="23" width="1440" height="831" />
     </state>
@@ -161,7 +174,7 @@
     <state x="340" y="178" width="670" height="676" key="search.everywhere.popup/0.23.1440.831@0.23.1440.831" timestamp="1605113418491" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/TeeTimeScraper$teetimenotifier.coverage" NAME="teetimenotifier Coverage Results" MODIFIED="1605117552022" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$APPLICATION_HOME_DIR$/bin/Users/giladspitzer/PycharmProjects/Upwork/TeeTimeScraper" />
+    <SUITE FILE_PATH="coverage/TeeTimeScraper$teetimenotifier.coverage" NAME="teetimenotifier Coverage Results" MODIFIED="1605188375870" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$APPLICATION_HOME_DIR$/bin/Users/giladspitzer/PycharmProjects/Upwork/TeeTimeScraper" />
     <SUITE FILE_PATH="coverage/TeeTimeScraper$models.coverage" NAME="models Coverage Results" MODIFIED="1604946337798" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$APPLICATION_HOME_DIR$/bin/Users/giladspitzer/PycharmProjects/Upwork/TeeTimeScraper" />
   </component>
 </project>

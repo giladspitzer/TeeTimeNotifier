@@ -61,7 +61,7 @@ def update_html(courses, all_html):
 
 def send_notifications(html):
     if html is not None:
-        Email(os.environ['TOADDR'], 'Tee Times', html)
+        Email(os.environ['TOADDR'], 'New Tee Times Found', html)
         SNSTextMessage()
 
 

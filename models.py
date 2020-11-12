@@ -21,15 +21,18 @@ class Reservation:
         self.time = time
         self.players = players
         self.price = price
-        self.sub_course = subcourse
+        self.sub_course = subcourse.split('-')[1] if '-' in subcourse else subcourse
         self.cart_fee = cart_fee
         self.new = new
 
+        print(self.course)
+        print(self.sub_course)
+        print('---')
     def render_html(self):
         if self.cart_fee is not None:
-            return f'<div class="reservation"><ul><li><b>@{self.time}</b></li><li>Players: {self.players}</li><li>${self.price}</li><li>Cart: ${self.cart_fee}</li></ul></div>'
+            return f'<div class="reservation"><ul><li><b>@{self.time}</b></li><li>Players: {self.players}</li><li>${self.price}</li><li>Cart: ${self.cart_fee}</li><li>{self.sub_course}</li></ul></div>'
         else:
-            return f'<div class="reservation"><ul><li><b>@{self.time}</b></li><li>Players: {self.players}</li><li>${self.price}</li></ul></div>'
+            return f'<div class="reservation"><ul><li><b>@{self.time}</b></li><li>Players: {self.players}</li><li>${self.price}</li><li>{self.sub_course}</li></ul></div>'
 
 class EzGolf:
     """Standard Model to accept data for any tee-time website that makes use of the ez-golf software."""

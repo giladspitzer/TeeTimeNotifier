@@ -84,4 +84,4 @@ def lambda_start(event, context):
         return 'An error has occurred. Please contact Gilad Spitzer to debug'
 
 
-lambda_start(0,0)
+# lambda_start(0,0)

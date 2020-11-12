@@ -83,3 +83,5 @@ def lambda_start(event, context):
         SNSError('An error has occurred. Please contact Gilad Spitzer to debug')
         return 'An error has occurred. Please contact Gilad Spitzer to debug'
 
+
+lambda_start(0,0)

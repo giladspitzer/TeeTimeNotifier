@@ -25,9 +25,6 @@ class Reservation:
         self.cart_fee = cart_fee
         self.new = new
 
-        print(self.course)
-        print(self.sub_course)
-        print('---')
     def render_html(self):
         if self.cart_fee is not None:
             return f'<div class="reservation"><ul><li><b>@{self.time}</b></li><li>Players: {self.players}</li><li>${self.price}</li><li>Cart: ${self.cart_fee}</li><li>{self.sub_course}</li></ul></div>'

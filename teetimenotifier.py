@@ -75,7 +75,7 @@ def main():
     send_notifications(email_html)
 
 
-def start(event, context):
+def lambda_start(event, context):
     try:
         main()
         return 'Success'

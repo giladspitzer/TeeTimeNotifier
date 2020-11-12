@@ -2,10 +2,14 @@ import pytz
 import requests
 from datetime import datetime, timedelta
 from bs4 import BeautifulSoup as bs
+import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
 import json
-SF = pytz.timezone('US/Pacific')
+import os
+import boto3
 
-# TODO- change print failures to email, documentation, clearing of code, scan for new ones, send HTML email, text message, API endpoint
+SF = pytz.timezone('US/Pacific')
 
 
 class Reservation:
@@ -122,7 +126,7 @@ class EzGolf:
         for d in self.get_list_dates():
             r = requests.post(self.url, self.make_payload(d))
             if r.status_code != 200:
-                print("Failure")
+                SNSError('Error fetching data for ' + str(self.name) + '. Contact Gilad Sptizer to debug.')
             else:
                 reservations_day = self.parse_data(json.loads(r.content.decode('utf-8'))['Reservations'], d)
                 for x in reservations_day:
@@ -221,7 +225,7 @@ class Quick18:
         for d in self.get_list_dates():
             r = requests.post(self.url, self.make_payload(d))
             if r.status_code != 200:
-                print("Failure")
+                SNSError('Error fetching data for ' + str(self.name) + '. Contact Gilad Sptizer to debug.')
             else:
                 reservations_day = self.parse_data(r.content, d)
                 for x in reservations_day:
@@ -316,10 +320,60 @@ class ForeUp:
         for d in self.get_list_dates():
             r = requests.get(self.make_payload(d))
             if r.status_code != 200:
-                print("Failure")
+                SNSError('Error fetching data for ' + str(self.name) + '. Contact Gilad Sptizer to debug.')
             else:
                 reservations_day = self.parse_data(json.loads(r.content.decode('utf-8')), d)
                 for x in reservations_day:
                     reservations.append(x)
 
         self.reservations = reservations
+
+
+class Email:
+    def __init__(self, to_addr, subject, html):
+        self.to = to_addr
+        self.subject = subject
+        self.html = html
+        self.text = ''
+        self.sender = 'bayareateetimes@gmail.com'
+
+        self.send_email()
+
+    def send_email(self):
+        message = MIMEMultipart("alternative")
+        message["Subject"] = self.subject
+        message["From"] = self.sender
+        message["To"] = self.to
+        part1 = MIMEText(self.text, "plain")
+        part2 = MIMEText(self.html, "html")
+        message.attach(part1)
+        message.attach(part2)
+
+        with smtplib.SMTP("smtp.gmail.com", 587) as server:
+            server.ehlo()
+            server.starttls()
+            server.login(self.sender, os.environ['MAIL_PASSWORD'])
+            server.sendmail(
+                self.sender, self.to, message.as_string()
+            )
+
+
+class SNSTextMessage:
+    def __init__(self):
+        client = boto3.client('sns', region_name='us-west-1', aws_access_key_id=os.environ['AWS_ACCESS'],
+                              aws_secret_access_key=os.environ['AWS_SECRET'])
+        response = client.publish(
+            TopicArn='arn:aws:sns:us-west-1:527232459706:New_TEE_TIMES',
+            Message='New Tee Times Found -- Check your email!',
+        )
+
+
+class SNSError:
+    def __init__(self, message):
+        client = boto3.client('sns', region_name='us-west-1', aws_access_key_id=os.environ['AWS_ACCESS'],
+                              aws_secret_access_key=os.environ['AWS_SECRET'])
+        response = client.publish(
+            TopicArn='arn:aws:sns:us-west-1:527232459706:TeeTimeNotifier_Error',
+            Message=message,
+        )
+

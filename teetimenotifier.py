@@ -31,11 +31,11 @@ def create_courses(sheet):
     for i in active:
         data = sheet.batch_get(['A' + str(i) + ':T' + str(i)])[0][0]
         if data[3] == 'EzLinks':
-            courses.append(EzGolf(i, data[0], data[2], get_days_desired(data[13:20]), data[4], data[5], data[6], data[7], data[20], data[22], data[10], data[11]))
+            courses.append(EzGolf(i, data[0], data[2], get_days_desired(data[13:20]), data[4], data[5], data[6], data[7], data[20], data[22], data[11], data[12]))
         elif data[3] == 'Quick18':
-            courses.append(Quick18(i, data[0], data[2], get_days_desired(data[13:20]), data[4], data[5], data[6], data[7], data[20], data[22], data[12]))
+            courses.append(Quick18(i, data[0], data[2], get_days_desired(data[13:20]), data[4], data[5], data[6], data[7], data[20], data[22], data[13]))
         elif data[3] == 'ForeUp':
-            courses.append(ForeUp(i, data[0], get_days_desired(data[13:20]), data[4], data[6], data[8], data[9], data[20], data[22], data[2], data[12]))
+            courses.append(ForeUp(i, data[0], get_days_desired(data[13:20]), data[4], data[6], data[8], data[9], data[20], data[22], data[2], data[13]))
 
     return courses
 

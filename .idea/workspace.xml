@@ -5,6 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e2b11e8b-2b03-486a-8363-92d7635777d7" name="Default Changelist" comment="">
+      <change beforePath="$APPLICATION_HOME_DIR$/bin/Users/giladspitzer/PycharmProjects/Upwork/TeeTimeScraper/.idea/workspace.xml" beforeDir="false" afterPath="$APPLICATION_HOME_DIR$/bin/Users/giladspitzer/PycharmProjects/Upwork/TeeTimeScraper/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$APPLICATION_HOME_DIR$/bin/Users/giladspitzer/PycharmProjects/Upwork/TeeTimeScraper/models.py" beforeDir="false" afterPath="$APPLICATION_HOME_DIR$/bin/Users/giladspitzer/PycharmProjects/Upwork/TeeTimeScraper/models.py" afterDir="false" />
       <change beforePath="$APPLICATION_HOME_DIR$/bin/Users/giladspitzer/PycharmProjects/Upwork/TeeTimeScraper/teetimenotifier.py" beforeDir="false" afterPath="$APPLICATION_HOME_DIR$/bin/Users/giladspitzer/PycharmProjects/Upwork/TeeTimeScraper/teetimenotifier.py" afterDir="false" />
     </list>
@@ -34,6 +35,7 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$APPLICATION_HOME_DIR$/bin/Users/giladspitzer/PycharmProjects/Upwork/TeeTimeScraper" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -44,6 +46,9 @@
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$APPLICATION_HOME_DIR$/bin/Users/giladspitzer/PycharmProjects/Upwork/TeeTimeScraper" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$APPLICATION_HOME_DIR$/bin/Users/giladspitzer/PycharmProjects/Upwork/TeeTimeScraper" />
       <recent name="$APPLICATION_HOME_DIR$/bin/Users/giladspitzer/PycharmProjects/Upwork/" />
@@ -114,7 +119,8 @@
       <workItem from="1604669364469" duration="39000" />
       <workItem from="1604669425572" duration="828000" />
       <workItem from="1604849943445" duration="59999000" />
-      <workItem from="1605189220875" duration="765000" />
+      <workItem from="1605189220875" duration="1629000" />
+      <workItem from="1605278400999" duration="345000" />
     </task>
     <servers />
   </component>
@@ -155,15 +161,15 @@
     </state>
     <state x="172" y="132" key="SettingsEditor/0.23.1440.831@0.23.1440.831" timestamp="1605181832028" />
     <state x="172" y="132" key="SettingsEditor/0.23.1440.832@0.23.1440.832" timestamp="1605188327968" />
-    <state x="335" y="269" key="com.intellij.ide.util.TipDialog" timestamp="1605189221199">
+    <state x="335" y="269" key="com.intellij.ide.util.TipDialog" timestamp="1605278400905">
       <screen x="0" y="23" width="1440" height="831" />
     </state>
     <state x="335" y="269" key="com.intellij.ide.util.TipDialog/0.23.1440.830@0.23.1440.830" timestamp="1604849963060" />
-    <state x="335" y="269" key="com.intellij.ide.util.TipDialog/0.23.1440.831@0.23.1440.831" timestamp="1605189221199" />
-    <state x="323" y="177" width="991" height="518" key="find.popup" timestamp="1605184885458">
+    <state x="335" y="269" key="com.intellij.ide.util.TipDialog/0.23.1440.831@0.23.1440.831" timestamp="1605278400905" />
+    <state x="323" y="177" width="991" height="518" key="find.popup" timestamp="1605190275120">
       <screen x="0" y="23" width="1440" height="831" />
     </state>
-    <state x="323" y="177" width="991" height="518" key="find.popup/0.23.1440.831@0.23.1440.831" timestamp="1605184885458" />
+    <state x="323" y="177" width="991" height="518" key="find.popup/0.23.1440.831@0.23.1440.831" timestamp="1605190275120" />
     <state x="340" y="178" width="670" height="676" key="search.everywhere.popup" timestamp="1605113418491">
       <screen x="0" y="23" width="1440" height="831" />
     </state>

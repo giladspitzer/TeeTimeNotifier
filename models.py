@@ -33,7 +33,7 @@ class Reservation:
 
 class EzGolf:
     """Standard Model to accept data for any tee-time website that makes use of the ez-golf software."""
-    def __init__(self, row, name, url, days, players, course_ids, days_out, price_class, previous_search, img):
+    def __init__(self, row, name, url, days, players, course_ids, days_out, price_class, previous_search, img, tod_s, tod_e):
         self.row = row
         self.name = name
         self.url = url.split('/index')[0] + '/api/search/search'
@@ -42,8 +42,8 @@ class EzGolf:
         self.course_ids = [int(x) for x in course_ids.split(',')] # 321, 341
         self.days_out = int(days_out)  # 10 or "10"
         self.num_holes = 1
-        self.start_time = "5:00 AM"
-        self.end_time = "7:00 PM"
+        self.start_time = tod_s
+        self.end_time = tod_e
         self.price = int(price_class) if int(price_class) != 0 else None
         self.previous_search = [int(x) for x in json.loads(previous_search)] if len(previous_search) > 0 else []
         self.reservations = []
@@ -51,6 +51,7 @@ class EzGolf:
         self.img = img if img != '0' else 'https://teetimenotifier.s3-us-west-1.amazonaws.com/teetimenotifier.png'
         self.booking_url = url
 
+        print(self.__dict__)
         self.retrieve_data()
         self.create_html()
 
@@ -136,7 +137,7 @@ class EzGolf:
 
 class Quick18:
     """Standard Model to accept data for any tee-time website that makes use of the quick18 software."""
-    def __init__(self, row, name, url, days, players, course_id, days_out, price_class, previous_search, img):
+    def __init__(self, row, name, url, days, players, course_id, days_out, price_class, previous_search, img, tod):
         self.row = row
         self.name = name
         self.url = url.split('/teetimes')[0] + '/teetimes/searchmatrix'
@@ -144,13 +145,14 @@ class Quick18:
         self.players = int(players) if int(players) > 0 and int(players) < 5 else 4
         self.course_ids = int(course_id) if len(course_id.split(',')) < 2 else 0 # 321, 341
         self.days_out = int(days_out)  # 10 or "10"
-        self.time_day = "Any"
+        self.time_day = tod
         self.price = int(price_class) - 1 if int(price_class) > 0 else None
         self.previous_search = [int(x) for x in json.loads(previous_search)] if len(previous_search) > 0 else []
         self.reservations = []
         self.html = ''
         self.img = img if img != '0' else 'https://teetimenotifier.s3-us-west-1.amazonaws.com/teetimenotifier.png'
         self.booking_url = url
+        print(self.__dict__)
 
         self.retrieve_data()
         self.create_html()
@@ -236,7 +238,7 @@ class Quick18:
 
 class ForeUp:
     """Standard Model to accept data for any tee-time website that makes use of the foreup software."""
-    def __init__(self, row, name, days, players, days_out, schedule_id, booking_class, previous_search, img, booking_url):
+    def __init__(self, row, name, days, players, days_out, schedule_id, booking_class, previous_search, img, booking_url, tod):
         self.row = row
         self.name = name
         self.url = 'https://foreupsoftware.com/index.php/api/booking/times?'
@@ -248,8 +250,11 @@ class ForeUp:
         self.previous_search = [int(x) for x in json.loads(previous_search)] if len(previous_search) > 0 else []
         self.reservations = []
         self.html = ''
+        self.tod = tod
         self.img = img if img != '0' else 'https://teetimenotifier.s3-us-west-1.amazonaws.com/teetimenotifier.png'
         self.booking_url = booking_url
+        print(self.__dict__)
+
         self.retrieve_data()
         self.create_html()
 
@@ -272,7 +277,7 @@ class ForeUp:
 
     def make_payload(self, date):
         """Returns payload for this website type packaged with accompanying data"""
-        return self.url + f"time=all&date%={date}&holes=18&players={self.players}&booking_class={self.b_class}&schedule_id={self.s_id}&specials_only=0&api_key=no_limits"
+        return self.url + f"time={self.tod}&date%={date}&holes=18&players={self.players}&booking_class={self.b_class}&schedule_id={self.s_id}&specials_only=0&api_key=no_limits"
 
     def make_id(self, date):
         """Creates unique id for reservation based on timestamp -- used to keep track of whats new"""

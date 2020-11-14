@@ -33,9 +33,9 @@ def create_courses(sheet):
         if data[3] == 'EzLinks':
             courses.append(EzGolf(i, data[0], data[2], get_days_desired(data[13:20]), data[4], data[5], data[6], data[7], data[20], data[22], data[11], data[12]))
         elif data[3] == 'Quick18':
-            courses.append(Quick18(i, data[0], data[2], get_days_desired(data[13:20]), data[4], data[5], data[6], data[7], data[20], data[22], data[13]))
+            courses.append(Quick18(i, data[0], data[2], get_days_desired(data[13:20]), data[4], data[5], data[6], data[7], data[20], data[22], data[10]))
         elif data[3] == 'ForeUp':
-            courses.append(ForeUp(i, data[0], get_days_desired(data[13:20]), data[4], data[6], data[8], data[9], data[20], data[22], data[2], data[13]))
+            courses.append(ForeUp(i, data[0], get_days_desired(data[13:20]), data[4], data[6], data[8], data[9], data[20], data[22], data[2], data[10]))
 
     return courses
 
@@ -76,6 +76,10 @@ def main():
 
 
 def lambda_start(event, context):
+    os.environ['AWS_ACCESS'] = ***REMOVED***
+    os.environ['AWS_SECRET'] = '***REMOVED***'
+    os.environ['MAIL_PASSWORD'] = 'HiGilad!'
+    os.environ['TOADDR'] = 'devgilad@gmail.com'
     try:
         main()
         return 'Success'
@@ -84,4 +88,4 @@ def lambda_start(event, context):
         return 'An error has occurred. Please contact Gilad Spitzer to debug'
 
 
-# lambda_start(0,0)
+lambda_start(0,0)

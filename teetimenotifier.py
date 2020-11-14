@@ -29,7 +29,7 @@ def create_courses(sheet):
     active_row = sheet.col_values(2)
     active = [x + 1 for x in range(len(active_row)) if active_row[x] == 'Yes']
     for i in active:
-        data = sheet.batch_get(['A' + str(i) + ':T' + str(i)])[0][0]
+        data = sheet.batch_get(['A' + str(i) + ':W' + str(i)])[0][0]
         if data[3] == 'EzLinks':
             courses.append(EzGolf(i, data[0], data[2], get_days_desired(data[13:20]), data[4], data[5], data[6], data[7], data[20], data[22], data[11], data[12]))
         elif data[3] == 'Quick18':
@@ -84,4 +84,4 @@ def lambda_start(event, context):
         return 'An error has occurred. Please contact Gilad Spitzer to debug'
 
 
-lambda_start(0,0)
+# lambda_start(0,0)

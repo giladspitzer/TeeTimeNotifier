@@ -51,7 +51,6 @@ class EzGolf:
         self.img = img if img != '0' else 'https://teetimenotifier.s3-us-west-1.amazonaws.com/teetimenotifier.png'
         self.booking_url = url
 
-        print(self.__dict__)
         self.retrieve_data()
         self.create_html()
 
@@ -152,7 +151,6 @@ class Quick18:
         self.html = ''
         self.img = img if img != '0' else 'https://teetimenotifier.s3-us-west-1.amazonaws.com/teetimenotifier.png'
         self.booking_url = url
-        print(self.__dict__)
 
         self.retrieve_data()
         self.create_html()
@@ -253,7 +251,6 @@ class ForeUp:
         self.tod = tod
         self.img = img if img != '0' else 'https://teetimenotifier.s3-us-west-1.amazonaws.com/teetimenotifier.png'
         self.booking_url = booking_url
-        print(self.__dict__)
 
         self.retrieve_data()
         self.create_html()

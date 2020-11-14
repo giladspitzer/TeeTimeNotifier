@@ -43,7 +43,7 @@ def create_courses(sheet):
 def update_previous_found(sheet, courses):
     updates = []
     for course in courses:
-        updates.append({'range': 'R' + str(course.row) + ':S' + str(course.row),
+        updates.append({'range': 'U' + str(course.row) + ':V' + str(course.row),
                         'values': [[course.extract_ids(), datetime.now(SF).strftime("%m/%d/%Y, %H:%M:%S")]]})
     sheet.batch_update(updates)
 

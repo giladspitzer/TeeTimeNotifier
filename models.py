@@ -295,7 +295,7 @@ class ForeUp:
                                             players=r['available_spots'],
                                             price=r['guest_green_fee'],
                                             subcourse=r['schedule_name'],
-                                            cart_fee=r['guest_cart_fee'],
+                                            cart_fee=r['guest_cart_fee'] if 'guest_cart_fee' in r.keys() else 0,
                                             new=True if self.make_id(r['time']) not in self.previous_search else False
                                             )
                                 )

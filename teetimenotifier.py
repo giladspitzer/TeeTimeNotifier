@@ -76,10 +76,6 @@ def main():
 
 
 def lambda_start(event, context):
-    os.environ['AWS_ACCESS'] = ***REMOVED***
-    os.environ['AWS_SECRET'] = '***REMOVED***'
-    os.environ['MAIL_PASSWORD'] = 'HiGilad!'
-    os.environ['TOADDR'] = 'devgilad@gmail.com'
     try:
         main()
         return 'Success'
@@ -88,4 +84,4 @@ def lambda_start(event, context):
         return 'An error has occurred. Please contact Gilad Spitzer to debug'
 
 
-lambda_start(0,0)
+# lambda_start(0,0)

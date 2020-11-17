@@ -31,6 +31,7 @@ class Reservation:
         else:
             return f'<div class="reservation"><ul><li><b>@{self.time}</b></li><li>Players: {self.players}</li><li>${self.price}</li><li>{self.sub_course}</li></ul></div>'
 
+
 class EzGolf:
     """Standard Model to accept data for any tee-time website that makes use of the ez-golf software."""
     def __init__(self, row, name, url, days, players, course_ids, days_out, price_class, previous_search, img, tod_s, tod_e):
@@ -87,22 +88,35 @@ class EzGolf:
     def format_date(self, date):
         return datetime.strptime(date,'%m/%d/%Y').strftime('%A') + ' ' + date
 
+    def check_time_range(self, time):
+        start = datetime.strptime(self.start_time, "%H:%M")
+        end = datetime.strptime(self.end_time, "%H:%M")
+        if len(time.split(':')[0]) == 1:
+            r_time = datetime.strptime('0' + time, "%I:%M %p")
+        else:
+            r_time = datetime.strptime(time, "%I:%M %p")
+        if start <= r_time <= end:
+            return True
+        else:
+            return False
+
     def parse_data(self, data, date):
         """Accepts html found from website and pareses it into list of reservations"""
         reservations = []
         for r in data:
             if (self.price is not None and int(r['SponsorID']) == self.price) or (self.price is None):
-                reservations.append(Reservation(
-                                                id=self.make_id(r['TeeTime']),
-                                                course=self.name,
-                                                date=self.format_date(date),
-                                                time=r['TeeTimeDisplay'],
-                                                players=r['PlayersAvailable'],
-                                                price=r['Price'],
-                                                subcourse=r['CourseName'],
-                                                new=True if self.make_id(r['TeeTime']) not in self.previous_search else False
-                                                )
-                                    )
+                if self.check_time_range(r['TeeTimeDisplay']):
+                    reservations.append(Reservation(
+                                                    id=self.make_id(r['TeeTime']),
+                                                    course=self.name,
+                                                    date=self.format_date(date),
+                                                    time=r['TeeTimeDisplay'],
+                                                    players=r['PlayersAvailable'],
+                                                    price=r['Price'],
+                                                    subcourse=r['CourseName'],
+                                                    new=True if self.make_id(r['TeeTime']) not in self.previous_search else False
+                                                    )
+                                        )
         return reservations
 
     def create_html(self):
@@ -136,7 +150,7 @@ class EzGolf:
 
 class Quick18:
     """Standard Model to accept data for any tee-time website that makes use of the quick18 software."""
-    def __init__(self, row, name, url, days, players, course_id, days_out, price_class, previous_search, img, tod):
+    def __init__(self, row, name, url, days, players, course_id, days_out, price_class, previous_search, img, tod_s, tod_e):
         self.row = row
         self.name = name
         self.url = url.split('/teetimes')[0] + '/teetimes/searchmatrix'
@@ -144,7 +158,8 @@ class Quick18:
         self.players = int(players) if int(players) > 0 and int(players) < 5 else 4
         self.course_ids = int(course_id) if len(course_id.split(',')) < 2 else 0 # 321, 341
         self.days_out = int(days_out)  # 10 or "10"
-        self.time_day = tod
+        self.start_time = tod_s
+        self.end_time = tod_e
         self.price = int(price_class) - 1 if int(price_class) > 0 else None
         self.previous_search = [int(x) for x in json.loads(previous_search)] if len(previous_search) > 0 else []
         self.reservations = []
@@ -175,7 +190,7 @@ class Quick18:
     def make_payload(self, date):
         """Returns payload for this website type packaged with accompanying data"""
         return {"SearchForm.Date": date,
-                "SearchForm.TimeOfDay": str(self.time_day),
+                "SearchForm.TimeOfDay": "Any",
                 "SearchForm.Players": str(self.players),
                 "SearchForm.CourseId": str(self.course_ids)}
 
@@ -186,22 +201,35 @@ class Quick18:
     def format_date(self, date):
         return datetime.strptime(date,'%m/%d/%Y').strftime('%A') + ' ' + date
 
+    def check_time_range(self, time):
+        start = datetime.strptime(self.start_time, "%H:%M")
+        end = datetime.strptime(self.end_time, "%H:%M")
+        if len(time.split(':')[0]) == 1:
+            r_time = datetime.strptime('0' + time, "%I:%M%p")
+        else:
+            r_time = datetime.strptime(time, "%I:%M%p")
+        if start <= r_time <= end:
+            return True
+        else:
+            return False
+
     def parse_data(self, html, date):
         """Accepts html found from website and pareses it into list of reservations"""
         soup = bs(html, "html.parser")
         reservations_raw = soup.find(attrs={'class': 'matrixTable'}).find('tbody').find_all('tr')
         reservations = []
         for r in reservations_raw:
-            reservations.append(Reservation(course=self.name,
-                                            id=self.make_id(r.find(attrs={'class': 'teebutton'})['href']),
-                                            date=self.format_date(date),
-                                            time=r.find(attrs={'class': 'mtrxTeeTimes'}).get_text().split()[0],
-                                            players=r.find(attrs={'class': 'matrixPlayers'}).get_text(),
-                                            price=[x.get_text() for x in r.findAll(attrs={'class': 'mtrxPrice'})][self.price] if self.price is not None else [x.get_text() for x in r.findAll(attrs={'class': 'mtrxPrice'})],
-                                            subcourse=r.find(attrs={'class': 'mtrxCourse'}).get_text() if r.find(attrs={'class': 'mtrxCourse'}) is not None else self.name,
-                                            new=True if self.make_id(r.find(attrs={'class': 'teebutton'})['href']) not in self.previous_search else False
-                                            )
-                                )
+            if self.check_time_range(r.find(attrs={'class': 'mtrxTeeTimes'}).get_text().split()[0]):
+                reservations.append(Reservation(course=self.name,
+                                                id=self.make_id(r.find(attrs={'class': 'teebutton'})['href']),
+                                                date=self.format_date(date),
+                                                time=r.find(attrs={'class': 'mtrxTeeTimes'}).get_text().split()[0],
+                                                players=r.find(attrs={'class': 'matrixPlayers'}).get_text(),
+                                                price=[x.get_text() for x in r.findAll(attrs={'class': 'mtrxPrice'})][self.price] if self.price is not None else [x.get_text() for x in r.findAll(attrs={'class': 'mtrxPrice'})],
+                                                subcourse=r.find(attrs={'class': 'mtrxCourse'}).get_text() if r.find(attrs={'class': 'mtrxCourse'}) is not None else self.name,
+                                                new=True if self.make_id(r.find(attrs={'class': 'teebutton'})['href']) not in self.previous_search else False
+                                                )
+                                    )
         return reservations
 
     def create_html(self):
@@ -236,7 +264,7 @@ class Quick18:
 
 class ForeUp:
     """Standard Model to accept data for any tee-time website that makes use of the foreup software."""
-    def __init__(self, row, name, days, players, days_out, schedule_id, booking_class, previous_search, img, booking_url, tod):
+    def __init__(self, row, name, days, players, days_out, schedule_id, booking_class, previous_search, img, booking_url, tod_s, tod_e):
         self.row = row
         self.name = name
         self.url = 'https://foreupsoftware.com/index.php/api/booking/times?'
@@ -248,7 +276,8 @@ class ForeUp:
         self.previous_search = [int(x) for x in json.loads(previous_search)] if len(previous_search) > 0 else []
         self.reservations = []
         self.html = ''
-        self.tod = tod
+        self.start_time = tod_s
+        self.end_time = tod_e
         self.img = img if img != '0' else 'https://teetimenotifier.s3-us-west-1.amazonaws.com/teetimenotifier.png'
         self.booking_url = booking_url
 
@@ -274,7 +303,7 @@ class ForeUp:
 
     def make_payload(self, date):
         """Returns payload for this website type packaged with accompanying data"""
-        return self.url + f"time={self.tod}&date%={date}&holes=18&players={self.players}&booking_class={self.b_class}&schedule_id={self.s_id}&specials_only=0&api_key=no_limits"
+        return self.url + f"time=all&date%={date}&holes=18&players={self.players}&booking_class={self.b_class}&schedule_id={self.s_id}&specials_only=0&api_key=no_limits"
 
     def make_id(self, date):
         """Creates unique id for reservation based on timestamp -- used to keep track of whats new"""
@@ -283,22 +312,32 @@ class ForeUp:
     def format_date(self, date):
         return datetime.strptime(date,'%m-%d-%Y').strftime('%A') + ' ' + date
 
+    def check_time_range(self, time):
+        start = datetime.strptime(self.start_time, "%H:%M")
+        end = datetime.strptime(self.end_time, "%H:%M")
+        r_time = datetime.strptime(time, "%H:%M")
+        if start <= r_time <= end:
+            return True
+        else:
+            return False
+
     def parse_data(self, data, date):
         """Accepts html found from website and pareses it into list of reservations"""
         reservations = []
         for r in data:
-            reservations.append(Reservation(
-                                            id=self.make_id(r['time']),
-                                            course=self.name,
-                                            date=self.format_date(date),
-                                            time=r['time'].split(' ')[1],
-                                            players=r['available_spots'],
-                                            price=r['guest_green_fee'],
-                                            subcourse=r['schedule_name'],
-                                            cart_fee=r['guest_cart_fee'] if 'guest_cart_fee' in r.keys() else 0,
-                                            new=True if self.make_id(r['time']) not in self.previous_search else False
-                                            )
-                                )
+            if self.check_time_range(r['time'].split(' ')[1]):
+                reservations.append(Reservation(
+                                                id=self.make_id(r['time']),
+                                                course=self.name,
+                                                date=self.format_date(date),
+                                                time=r['time'].split(' ')[1],
+                                                players=r['available_spots'],
+                                                price=r['guest_green_fee'],
+                                                subcourse=r['schedule_name'],
+                                                cart_fee=r['guest_cart_fee'] if 'guest_cart_fee' in r.keys() else 0,
+                                                new=True if self.make_id(r['time']) not in self.previous_search else False
+                                                )
+                                    )
         return reservations
 
     def create_html(self):

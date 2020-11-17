@@ -29,13 +29,13 @@ def create_courses(sheet):
     active_row = sheet.col_values(2)
     active = [x + 1 for x in range(len(active_row)) if active_row[x] == 'Yes']
     for i in active:
-        data = sheet.batch_get(['A' + str(i) + ':W' + str(i)])[0][0]
+        data = sheet.batch_get(['A' + str(i) + ':V' + str(i)])[0][0]
         if data[3] == 'EzLinks':
-            courses.append(EzGolf(i, data[0], data[2], get_days_desired(data[13:20]), data[4], data[5], data[6], data[7], data[20], data[22], data[11], data[12]))
+            courses.append(EzGolf(i, data[0], data[2], get_days_desired(data[12:19]), data[4], data[5], data[6], data[7], data[19], data[21], data[10], data[11]))
         elif data[3] == 'Quick18':
-            courses.append(Quick18(i, data[0], data[2], get_days_desired(data[13:20]), data[4], data[5], data[6], data[7], data[20], data[22], data[10]))
+            courses.append(Quick18(i, data[0], data[2], get_days_desired(data[12:19]), data[4], data[5], data[6], data[7], data[19], data[21], data[10], data[11]))
         elif data[3] == 'ForeUp':
-            courses.append(ForeUp(i, data[0], get_days_desired(data[13:20]), data[4], data[6], data[8], data[9], data[20], data[22], data[2], data[10]))
+            courses.append(ForeUp(i, data[0], get_days_desired(data[12:19]), data[4], data[6], data[8], data[9], data[19], data[21], data[2], data[10], data[11]))
 
     return courses
 
@@ -43,7 +43,7 @@ def create_courses(sheet):
 def update_previous_found(sheet, courses):
     updates = []
     for course in courses:
-        updates.append({'range': 'U' + str(course.row) + ':V' + str(course.row),
+        updates.append({'range': 'T' + str(course.row) + ':U' + str(course.row),
                         'values': [[course.extract_ids(), datetime.now(SF).strftime("%m/%d/%Y, %H:%M:%S")]]})
     sheet.batch_update(updates)
 
@@ -58,6 +58,7 @@ def update_html(courses, all_html):
         return new_html
     else:
         return None
+
 
 def send_notifications(html):
     if html is not None:
